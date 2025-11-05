@@ -3,24 +3,28 @@ import fs from "fs/promises";
 
 async function get(filePath) {
   const data = await fs.readFile(filePath, "utf-8");
-  const numbersArr = data.split("\n").map(Number);
-  return numbersArr;
+  const charArr = data.split("\n");
+  return charArr;
 }
 
-const signs = await get("day01Data.txt");
+const signs = await get("day03Data.txt");
+
+console.log(signs);
 
 let countRight = 0;
 let countDown = 0;
 
 let treeCount = 0;
 
-const linesArr = signs.map((line) => line.toString());
+console.log(signs.length);
 
-while (countDown < linesArr.length) {
-    const line = linesArr[countDown];
+while (countDown < signs.length) {
+    const line = signs[countDown].trim();
     if (line[countRight % line.length] === "#") {
         treeCount++;
     }
     countRight += 3;
     countDown++;
 };
+
+console.log("Part 1:", treeCount);
